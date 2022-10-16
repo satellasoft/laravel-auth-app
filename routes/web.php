@@ -17,8 +17,14 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('site.index');
+})->name('site.index');
+
+Route::get('/quem-somos', function () {
+    return view('site.quem-somos');
+})->name('site.quem-somos');
+
+
 
 //Login module
 Route::group(['prefix' => '/login'], function () {
@@ -26,7 +32,6 @@ Route::group(['prefix' => '/login'], function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('login.logout');
     Route::post('/auth',  [AuthController::class, 'auth'])->name('login.auth');
 });
-
 
 //Admin module
 Route::group(['prefix' => '/admin', 'middleware' => ['userPermission:1']], function () {
